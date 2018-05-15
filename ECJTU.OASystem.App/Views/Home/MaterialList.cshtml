@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Client/Scripts/Material/atTheMaterial.js"></script>
+    <script src="~/Client/Services/materialService.js"></script>
+    <script src="~/Client/Scripts/Material/ListController.js"></script>
+<script src="~/Client/Scripts/Material/EditController.js"></script>
+<script src="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+}
+@section headcss{
+<link href="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+    }
+<div data-ng-app="atTheMaterial">
+    <div ng-view></div>
+</div>

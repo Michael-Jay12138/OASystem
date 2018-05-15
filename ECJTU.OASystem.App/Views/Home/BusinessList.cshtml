@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Client/Scripts/Business/atTheBusiness.js"></script>
+    <script src="~/Client/Services/businessService.js"></script>
+    <script src="~/Client/Scripts/Business/ListController.js"></script>
+<script src="~/Client/Scripts/Business/EditController.js"></script>
+}
+
+<div data-ng-app="atTheBusiness">
+    <div ng-view></div>
+</div>

@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Client/Scripts/Privilege/atThePrivilege.js"></script>
+    <script src="~/Client/Services/privilegeService.js"></script>
+    <script src="~/Client/Scripts/Privilege/ListController.js"></script>
+<script src="~/Client/Scripts/Privilege/EditController.js"></script>
+}
+
+<div data-ng-app="atThePrivilege">
+    <div ng-view></div>
+</div>

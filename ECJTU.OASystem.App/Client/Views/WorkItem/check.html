@@ -1,0 +1,61 @@
+﻿<div class="portlet box green" ng-app="atTheWorkItem">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-gift"></i>Form Actions On Bottom
+        </div>
+        <div class="tools">
+            <a href="javascript:;" class="collapse"> </a>
+            <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+            <a href="javascript:;" class="reload"> </a>
+            <a href="javascript:;" class="remove"> </a>
+        </div>
+    </div>
+    <div class="portlet-body form" ng-controller="EditController">
+        <!-- BEGIN FORM-->
+        <form action="#" class="form-horizontal">
+            <div class="form-body" id="formInst" ng-bind-html="edit.workitem.formInst">
+
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button ng-click="getNextActivityUsers()" type="button" data-toggle="modal" data-target="#selectUserModal" class="btn btn-circle green">Submit</button>
+                        <button type="button" class="btn btn-circle grey-salsa btn-outline">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+    <!--选择发送人员的模态框-->
+    <div class="modal fade" id="selectUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="EditController">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">请选择发送人员</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <fieldset>
+                            <div class="input-group">
+                                <span class="input-group-addon">下一环节</span>
+                                <input id="nextactivity" type="text" ng-model="edit.workitem.NextActivity.Name" required class="form-control" placeholder="环节名称" />
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">用户名称</span>
+                                <select class="form-control" ng-model="edit.workitem.NextUserId">
+                                    <option ng-repeat="item in edit.workitem.NextUsers" value="{{item.Id}}">{{item.Name}}</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit()">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

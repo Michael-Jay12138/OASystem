@@ -1,0 +1,171 @@
+﻿<div class="portlet light bordered" id="form_wizard_1" ng-app="atTheProject">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class=" icon-layers font-red"></i>
+            <span class="caption-subject font-red bold uppercase">
+                创建项目
+            </span>
+        </div>
+        <div class="actions">
+            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                <i class="icon-cloud-upload"></i>
+            </a>
+            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                <i class="icon-wrench"></i>
+            </a>
+            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                <i class="icon-trash"></i>
+            </a>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form class="form-horizontal" action="#" id="submit_form" method="POST" ng-controller="EditController">
+            <div class="form-wizard">
+                <div class="form-body">
+                    <ul class="nav nav-pills nav-justified steps">
+                        <li ng-class="{active:pageIndex==1,done:pageIndex>1}">
+                            <a href="#tab1" data-toggle="tab" class="step">
+                                <span class="number"> 1 </span>
+                                <span class="desc">
+                                    <i class="fa fa-check"></i> 项目基本信息
+                                </span>
+                            </a>
+                        </li>
+                        <li ng-class="{active:pageIndex==2,done:pageIndex>2}">
+                            <a href="#tab2" data-toggle="tab" class="step">
+                                <span class="number"> 2 </span>
+                                <span class="desc">
+                                    <i class="fa fa-check"></i> 填写项目表单
+                                </span>
+                            </a>
+                        </li>
+                        <li ng-class="{active:pageIndex==3,done:pageIndex>3}">
+                            <a href="#tab4" data-toggle="tab" class="step">
+                                <span class="number"> 3 </span>
+                                <span class="desc">
+                                    <i class="fa fa-check"></i> 确认并提交
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div id="bar" class="progress progress-striped" role="progressbar">
+                        <div class="progress-bar progress-bar-success" ng-class="{firstTab:pageIndex==1,secondTab:pageIndex==2,thirdTab:pageIndex==3}"> </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="alert alert-danger display-none">
+                            <button class="close" data-dismiss="alert"></button> You have some form errors. Please check below.
+                        </div>
+                        <div class="alert alert-success display-none">
+                            <button class="close" data-dismiss="alert"></button> Your form validation is successful!
+                        </div>
+                        <div class="tab-pane" ng-class="{active:pageIndex==1}" id="tab1">
+                            <h3 class="block">请填写项目基本信息</h3>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    项目名称
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input id="name" type="text" ng-model="edit.project.Name" required class="form-control" placeholder="项目名称" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    项目编号
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input id="projectno" type="text" ng-model="edit.project.ProjectNo" required class="form-control" placeholder="项目编号" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    业务序号
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input id="businessid" type="text" ng-model="edit.project.BusinessId" required class="form-control" placeholder="业务序号" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    业务名称
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select class="form-control" ng-model="edit.project.BusinessId">
+                                        <option ng-repeat="item in edit.project.Businesses" value="{{item.Id}}">{{item.Name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    备注
+                                </label>
+                                <div class="col-md-4">
+                                    <input id="remark" type="text" ng-model="edit.project.Remark" required class="form-control" placeholder="备注" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" ng-class="{active:pageIndex==2}" id="tab2">
+                            <h3 class="block">请填写项目表单</h3>
+                            <div id="tab2-form">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane" ng-class="{active:pageIndex==3}" id="tab3">
+                            <h3 class="block">请确认无误后提交</h3>
+                            <h4 class="form-section">基本信息</h4>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">项目名称:</label>
+                                <div class="col-md-4">
+                                    <p class="form-control-static" data-display="name">{{edit.project.Name}} </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">项目编号:</label>
+                                <div class="col-md-4">
+                                    <p class="form-control-static" data-display="projectno"> {{edit.project.ProjectNo}}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">业务序号:</label>
+                                <div class="col-md-4">
+                                    <p class="form-control-static" data-display="businessid">{{edit.project.BusinessId}} </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">备注:</label>
+                                <div class="col-md-4">
+                                    <p class="form-control-static" data-display="remark"> {{edit.project.Remark}}</p>
+                                </div>
+                            </div>
+                            <h4 class="form-section">表单</h4>
+                            <div id="tab3-form">
+
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <a href="javascript:;" class="btn default button-previous" ng-show="showByIndex(['2','3'])" ng-click="back()">
+                                <i class="fa fa-angle-left"></i> 后退
+                            </a>
+                            <a href="javascript:;" class="btn btn-outline green button-next" ng-show="showByIndex(['1','2'])" ng-click="continue()">
+                                下一步
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                            <a href="javascript:;" class="btn green button-submit" ng-show="showByIndex(['3'])" ng-click="submit()">
+                                提交
+                                <i class="fa fa-check"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

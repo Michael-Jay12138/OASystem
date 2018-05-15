@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Navigator privilege="false">
+  <Items name="后台管理" img="icon-puzzle">
+    <Item name="用户管理" img="" path="UserList"/>
+    <Item name="角色管理" img="" path="RoleList"/>
+    <Item name="机构管理" img="" path="OrganizationList"/>
+    <Item name="权限管理" img="" path="PrivilegeList"/>
+    <Item name="业务管理" img="" path="BusinessList"/>
+    <Item name="流程管理" img="" path="ProcessList"/>
+    <Item name="环节管理" img="" path="ActivityList"/>
+    <Item name="材料管理" img="" path="MaterialList"/>
+    <Item name="材料清单管理" img="" path="MaterialTempList"/>
+    <Item name="表单管理" img="" path="FormTempList"/>
+    <Item name="项目管理" img="" path="ProjectList"/>
+  </Items>
+  <Items name="日常办公" img="icon-settings">
+    <Item name="新建项目" img="" path="ProjectList#/project/create"/>
+    <Item name="在办箱" img="" path="WorkItemList?type=0"/>
+    <Item name="已办箱" img="" path="WorkItemList?type=1"/>
+  </Items>
+</Navigator>
