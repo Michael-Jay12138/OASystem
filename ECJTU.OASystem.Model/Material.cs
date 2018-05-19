@@ -20,7 +20,8 @@ namespace ECJTU.OASystem.Model
             if (DBHelper.ExcuetSql(sql) > 0)
             {
                 sql = "select sq_oa_Material.currval from dual";
-                return Convert.ToInt32(DBHelper.Query(sql).Rows[0][0].ToString());
+                Id = Convert.ToInt32(DBHelper.Query(sql).Rows[0][0].ToString());
+                return Id;
             }
             return 0;
         }
@@ -33,7 +34,9 @@ namespace ECJTU.OASystem.Model
 
         override public void Update()
         {
-            throw new NotImplementedException();
+            sql = "update oa_Material set  NAME='{0}',Extension='{1}',Path='{2}',MATERIALTEMP_INST_ID={3} where id={4}";
+            sql = string.Format(sql, Name, Extension, Path, MaterialTempInstId,Id);
+            DBHelper.ExcuetSql(sql);
         }
         override public void Assembly(System.Data.DataRow dr)
         {

@@ -29,18 +29,18 @@
         <table class="table table-striped" id="table">
             <thead>
                 <tr>
-                    <th>用户序号</th>
-                    <th>用户名称</th>
-                    <th>联系方式</th>
-                    <th>注册时间</th>
+                    <th>材料序号</th>
+                    <th>材料名称</th>
+                    <th>材料路径</th>
+                    <th>材料模板实例序号</th>
                     <th ng-show="haveLogin()">操作</th>
                 </tr>
             </thead>
             <tr ng-repeat="material in materials">
                 <td>{{material.Id}}</td>
                 <td>{{material.Name}}</td>
-                <td>{{material.MaterialPhone}}</td>
-                <td>{{material.MaterialRegisterDate}}</td>
+                <td>{{material.Path}}</td>
+                <td>{{material.MaterialTempInstId}}</td>
                 <td ng-show="haveLogin()">
                     <a href="" ng-click="edit(material)" data-toggle="modal" data-target="#createModal" class="btn btn-info">编辑</a>
                     <a href="" ng-click="confirmdelete(material)" data-toggle="modal" data-target="#confirmModal" class="btn btn-info">删除</a>
@@ -81,11 +81,11 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon">材料名称</span>
-                                    <input id="name" type="text" ng-model="edit.material.Name" required class="form-control" placeholder="材料名称" />
+                                    <input id="name" type="text" ng-model="edit.material.Name"  readonly class="form-control" placeholder="材料名称" />
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon">材料路径</span>
-                                    <input id="path" type="text" ng-model="edit.material.Path" required class="form-control" placeholder="材料路径" />
+                                    <input id="path" type="text" ng-model="edit.material.Path" readonly class="form-control" placeholder="材料路径" />
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon">材料模板实例序号</span>
@@ -101,7 +101,7 @@
                                             <span class="input-group-addon btn default btn-file">
                                                 <span class="fileinput-new"> 选择文件 </span>
                                                 <span class="fileinput-exists"> 更换 </span>
-                                                <input type="file" name="...">
+                                                <input type="file" id="file" onchange="angular.element(this).scope().fileSelected(this)">
                                             </span>
                                             <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> 移除 </a>
                                         </div>

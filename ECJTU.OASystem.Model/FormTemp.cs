@@ -22,7 +22,8 @@ namespace ECJTU.OASystem.Model
             if (DBHelper.ExcuetSql(sql, parameterValue) > 0)
             {
                 sql = "select sq_oa_FormTemp.currval from dual";
-                return Convert.ToInt32(DBHelper.Query(sql).Rows[0][0].ToString());
+                Id = Convert.ToInt32(DBHelper.Query(sql).Rows[0][0].ToString());
+                return Id;
             }
             return 0;
         }

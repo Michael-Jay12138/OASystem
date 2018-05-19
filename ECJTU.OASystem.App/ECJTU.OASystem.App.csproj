@@ -161,9 +161,8 @@
     </Compile>
     <Compile Include="Models\Tree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\FileService.asmx.cs">
-      <DependentUpon>FileService.asmx</DependentUpon>
-      <SubType>Component</SubType>
+    <Compile Include="Service\FileService.ashx.cs">
+      <DependentUpon>FileService.ashx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -257,7 +256,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Service\FileService.asmx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -284,6 +282,7 @@
     <Content Include="Views\Home\BusinessList.cshtml" />
     <Content Include="Views\Home\ProjectList.cshtml" />
     <Content Include="Views\Home\WorkItemList.cshtml" />
+    <Content Include="Service\FileService.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

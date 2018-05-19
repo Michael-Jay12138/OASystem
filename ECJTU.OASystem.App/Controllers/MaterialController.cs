@@ -43,7 +43,8 @@ namespace ECJTU.OASystem.App.Controllers
             material.Update();
             return true;
         }
-        public Boolean AddMaterial(int materialTempInstId,string materialLocalPath)
+        
+        public Object AddMaterial(int materialTempInstId,string materialLocalPath)
         {
             FileInfo fileInfo = new FileInfo(materialLocalPath);
             Model.Material material = new Model.Material();
@@ -56,8 +57,11 @@ namespace ECJTU.OASystem.App.Controllers
             Util.Ftp.FtpFile ftpFile = new Util.Ftp.FtpFile();
             ftpFile.FilePath = material.Path;
             ftpFile.Title = material.Name;
-            Util.Ftp.FtpHelper.UpLoad(ftpFile, materialLocalPath);
-            return true;
+            Util.Log.LogHelper.WriteLog( Util.Ftp.FtpHelper.UpLoad(ftpFile, materialLocalPath));
+            Dictionary<string, string> backData = new Dictionary<string, string>();
+            backData.Add("Id", materialId.ToString());
+            backData.Add("Path", material.Path);
+            return backData;
         }
     }
 }

@@ -12,9 +12,8 @@
             return $http.put(materialApiUrl + "UpdateMaterial/" + Material.MaterialId, Material);
         };
 
-        var create = function (Material) {
-            console.log(Material);
-            return $http.post(materialApiUrl + "CreateMaterial/", Material);
+        var create = function ( materialTempInstId, materialLocalPath) {
+            return $http.post(materialApiUrl + "AddMaterial", { materialTempInstId: materialTempInstId, materialLocalPath: materialLocalPath});
         };
 
         var destroy = function (Material) {
