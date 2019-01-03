@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -97,7 +97,7 @@
 
     function getContent() {
         var form=$("#render").val();
-        $.post('../../FormTemp/CreateFormFile', {formHtml:form}).then(function (result) {
+        $.post('../../FormTemp/formHtml2htmlFile', {formHtml:form}).then(function (result) {
             console.log(result);
             alert("保存成功");
             window.close();

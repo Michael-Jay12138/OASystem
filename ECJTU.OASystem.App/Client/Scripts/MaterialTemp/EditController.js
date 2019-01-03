@@ -17,7 +17,7 @@
         //更新数据
         var updateMaterialTemp = function () {
             var materialTempupdate = $scope.$root.edit.materialTemp;
-            materialTempService.update(materialTempupdate).then(function (result) {
+            materialTempService.update(materialTempupdate, $scope.$root.edit.materialTemp.BusinessId).then(function (result) {
                 console.log(result);
                 editMaterial(materialTempupdate);
             });
@@ -25,7 +25,7 @@
         //添加数据
         var createMaterialTemp = function () {
             var materialTempadd = $scope.$root.edit.materialTemp;
-            materialTempService.create(materialTempadd).then(function (result) {
+            materialTempService.create(materialTempadd, $scope.$root.edit.materialTemp.BusinessId).then(function (result) {
                 materialTempadd.Id = result;
                 addMaterialTemp(materialTempadd);
             });

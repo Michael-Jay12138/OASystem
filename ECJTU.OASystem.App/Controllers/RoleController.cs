@@ -90,5 +90,34 @@ namespace ECJTU.OASystem.App.Controllers
             root.children = children;
             return Newtonsoft.Json.JsonConvert.SerializeObject(root);
         }
+        public string GetRoleTreeByPrivilegeId(int privilegeId)
+        {
+            List<CommonAttribute> selectedRoleList = null;
+            if (privilegeId > 0)
+            {
+                selectedRoleList = service.GetDataList("t.*", "inner join OA_ROLE_PRIVILEGE rp on rp.roleid=t.id", "and rp.privilege=" + privilegeId);
+            }
+            List<CommonAttribute> roleList = service.GetDataList("t.*", "", "");
+            Models.Tree root = new Models.Tree();
+            root.id = "0";
+            root.text = "所有角色";
+            root.state = new Models.State();
+            root.state.opened = true;
+            List<Models.Tree> children = new List<Models.Tree>();
+            foreach (CommonAttribute role in roleList)
+            {
+                Models.Tree child = new Models.Tree();
+                child.id = role.Id.ToString();
+                child.text = role.Name.ToString();
+                if (selectedRoleList != null && selectedRoleList.Exists(r => r.Id == role.Id))
+                {
+                    child.state = new Models.State();
+                    child.state.selected = true;
+                }
+                children.Add(child);
+            }
+            root.children = children;
+            return Newtonsoft.Json.JsonConvert.SerializeObject(root);
+        }
     }
 }

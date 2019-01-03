@@ -40,6 +40,14 @@
         }
         getByPage(1);
         getPageCount();
+        $scope.download = function (material) {
+            $.post("../material/GetMaterial", material).then(function (result) {
+                //$.post("../Service/FileDownloadService.ashx", { tempFilePath: result }).then(function (data) {
+                    
+                //})
+                window.open("../Temp/" + result);
+            })
+        }
         //点击新增按钮
         $scope.create = function () {
             $scope.$root.edit = {

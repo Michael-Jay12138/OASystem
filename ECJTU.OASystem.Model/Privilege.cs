@@ -43,5 +43,20 @@ namespace ECJTU.OASystem.Model
             Name = dr["NAME"].ToString();
             ParentId = Convert.ToInt32(dr["PARENTID"].ToString());
         }
+        public void AddRole(int RoleId)
+        {
+            sql = "insert into OA_ROLE_PRIVILEGE (id,roleid,PRIVILEGE) values (sq_OA_ROLE_PRIVILEGE.nextval,{0},{1})";
+            sql = string.Format(sql, RoleId, Id);
+            DBHelper.ExcuetSql(sql);
+        }
+        public void UpdateRole(int[] roleIds)
+        {
+            sql = "delete from OA_ROLE_PRIVILEGE rp where rp.PRIVILEGE=" + Id;
+            DBHelper.ExcuetSql(sql);
+            foreach (int roleId in roleIds)
+            {
+                AddRole(roleId);
+            }
+        }
     }
 }

@@ -53,7 +53,7 @@ namespace ECJTU.OASystem.App.Controllers
         {
             Model.User user=GetUserByName(username);
             if (user.UserPwd == password)
-                return RedirectToRoute(new { controller = "Home", action = "UserList" });
+                return RedirectToRoute(new { controller = "Home", action = "WorkItemList",type=0 });
             return RedirectToRoute(new { controller = "Home", action = "Index" });
         }
         //根据环节id获取用户列表
@@ -64,7 +64,16 @@ namespace ECJTU.OASystem.App.Controllers
                                     inner join OA_ACTIVITY_ROLE ar on ar.roleid=ur.roleid", "and ar.activityid=" + activityId);
             return Newtonsoft.Json.JsonConvert.SerializeObject(userList);
         }
-
+        public string GetFAUsersByBusinessId(int businessId)
+        {
+            List<CommonAttribute> activityList = new DataService("Activity","OA_ACTIVITY").GetDataList("t.*",
+                                @"inner join OA_PROCESS p on p.id=t.processid", "and p.businessid="+businessId+" order by t.sort");
+            if (activityList.Count > 0)
+            {
+                return GetNextActivityUsers(activityList[0].Id);
+            }
+            return "";
+        }
         public string GetUserTree(int roleId)
         {
             List<CommonAttribute> selectedUserList=null;

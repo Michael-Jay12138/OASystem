@@ -1,0 +1,27 @@
+select tt.BUILDINGUSES, sum(tt.sarea) area, sum(tt.scount) amount
+  from (select case
+                 when t.BUILDINGUSES like '%住宅%' then
+                  '住宅'
+                 when t.BUILDINGUSES like '%教育%' then
+                  '教育'
+                 when t.BUILDINGUSES like '%工业厂房%' then
+                  '工业厂房'
+                 when t.BUILDINGUSES like '%办公%' then
+                  '办公'
+                 when t.BUILDINGUSES like '%仓储物流%' then
+                  '仓储物流'
+                 when t.BUILDINGUSES like '%交通市政%' then
+                  '交通市政'
+                 when t.BUILDINGUSES like '%商业%' then
+                  '商业'
+                 else
+                  '其他'
+               end as BUILDINGUSES,
+               t.sCount,
+               t.sArea
+          from STATICTIS_CITY_NEW t
+         where t.businessid = 244
+           and to_date(t.m_date, 'yyyy/MM') between
+               to_date('2016/1/1', 'yyyy/MM/dd') and
+               to_date('2016/12/31', 'yyyy/MM/dd')) tt
+ group by tt.BUILDINGUSES

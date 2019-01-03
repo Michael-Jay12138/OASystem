@@ -18,8 +18,12 @@ namespace ECJTU.OASystem.App.Controllers
             service = new DataService("Privilege","oa_privilege");
         }
 
-        public string GetNavigators(int UserId)
+        public string GetNavigators(string userName)
         {
+            Model.User user=new UserController().GetUserByName(userName);
+            List<CommonAttribute> privilegeList = service.GetDataList("t.*", @"inner join OA_ROLE_PRIVILEGE rp on t.ID=rp.PRIVILEGE
+                                                                                inner join OA_USER_ROLE ur on rp.ROLEID=ur.ROLEID", "and ur.USERID="+ user.Id);
+
             string parentMenu = @"<li class='nav-item '>
                               <a href = 'javascript:;' class='nav-link nav-toggle'>
                                 <i class='{1}'></i>
@@ -47,11 +51,21 @@ namespace ECJTU.OASystem.App.Controllers
                 string tempChild = "";
                 foreach (XmlElement node in xmlList)
                 {
+                    string parentName = node.Attributes["name"].Value;
+                    if (!privilegeList.Any(p=>p.Name==parentName))
+                    {
+                        continue;
+                    }
                     if (node.HasChildNodes)
                     {
                         tempChildHtml = "";
                         foreach (XmlNode child in node.ChildNodes)
                         {
+                            string childName= child.Attributes["name"].Value;
+                            if (!privilegeList.Any(p => p.Name == childName))
+                            {
+                                continue;
+                            }
                             tempChild = string.Format(subMenu, child.Attributes["name"].Value, child.Attributes["path"].Value);
                             tempChildHtml += tempChild;
                             tempChild = "";
@@ -95,6 +109,25 @@ namespace ECJTU.OASystem.App.Controllers
         public Boolean UpdatePrivilege(Model.Privilege privilege)
         {
             privilege.Update();
+            return true;
+        }
+        public Model.Privilege GetPrivilegeById(int privilegeId)
+        {
+            return (Model.Privilege)service.GetDataList("t.*", "", "and t.id=" + privilegeId)[0];
+        }
+        public Boolean AddRoles(int privilegeId, int[] roleIds)
+        {
+            Model.Privilege privilege = GetPrivilegeById(privilegeId);
+            foreach (int roleId in roleIds)
+            {
+                privilege.AddRole(roleId);
+            }
+            return true;
+        }
+        public Boolean UpdateRoles(int privilegeId, int[] roleIds)
+        {
+            Model.Privilege privilege = GetPrivilegeById(privilegeId);
+            privilege.UpdateRole(roleIds);
             return true;
         }
     }

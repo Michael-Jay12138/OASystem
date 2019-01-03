@@ -25,6 +25,7 @@
                 pages += "}]";
                 var obj = eval(pages);
                 $scope.pages = obj;
+                $scope.$apply();
             })
         }
         //根据当前页面获取数据

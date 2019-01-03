@@ -47,6 +47,14 @@ namespace ECJTU.OASystem.Model
             ActivityInstId = Convert.ToInt32(dr["ACTIVITY_INST_ID"].ToString());
             State = Convert.ToInt32(dr["STATE"].ToString());
             ReceiveUserId = Convert.ToInt32(dr["RECEIVE_USER_ID"].ToString());
+            try
+            {
+                Name = dr["NAME"].ToString();
+            }
+            catch (Exception e)
+            {
+                Util.Log.LogHelper.WriteLog(e.Message);
+            }
         }
     }
 }

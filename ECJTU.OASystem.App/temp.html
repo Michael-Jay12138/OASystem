@@ -1,26 +1,51 @@
-<form class="form-horizontal" >
+
 <fieldset>
 
 <!-- Form Name -->
-<legend>Form Name</legend>
+<legend>奖学金申请表</legend>
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="textinput-0">Text Input</label>
+  <label class="control-label" for="textinput-0">学生姓名</label>
   <div class="controls">
-    <input id="textinput-0" name="textinput-0" type="text" placeholder="placeholder" class="input-xlarge">
-    <p class="help-block">help</p>
+    <input id="textinput-0" name="textinput-0" type="text" placeholder="学生姓名" class="input-xlarge" value="曾倚劼">
+    <p class="help-block">申请人姓名</p>
   </div>
 </div>
 
-<!-- Password input-->
+<!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="passwordinput-0">Password Input</label>
+  <label class="control-label" for="textinput-1">学生学号</label>
   <div class="controls">
-    <input id="passwordinput-0" name="passwordinput-0" type="password" placeholder="placeholder" class="input-xlarge">
-    <p class="help-block">help</p>
+    <input id="textinput-1" name="textinput-1" type="text" placeholder="学生学号" class="input-xlarge" value="20142110010812">
+    <p class="help-block">申请人学号</p>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="control-group">
+  <label class="control-label" for="multipleradios-0">性别</label>
+  <div class="controls">
+    <label class="radio" for="multipleradios-0-0">
+      <input type="radio" name="multipleradios-0" id="multipleradios-0-0" value="男" checked="checked">
+      男
+    </label>
+    <label class="radio" for="multipleradios-0-1">
+      <input type="radio" name="multipleradios-0" id="multipleradios-0-1" value="女">
+      女
+    </label>
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="control-group">
+  <label class="control-label" for="textarea-0">申请理由</label>
+  <div class="controls">                     
+    <textarea id="textarea-0" name="textarea-0">申请理由为：</textarea>
   </div>
 </div>
 
 </fieldset>
-</form>
+
+
+

@@ -12,6 +12,7 @@ namespace ECJTU.OASystem.App.Controllers
     public class MaterialController : Controller
     {
         private DataService service = null;
+        private string tempFileDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Temp");
         public MaterialController()
         {
             service = new DataService("Material","oa_material");
@@ -21,13 +22,36 @@ namespace ECJTU.OASystem.App.Controllers
         {
             return View();
         }
-        public int GetDataCount()
+        public int GetDataCount(int workItemId)
         {
-            return service.GetDataCount();
+            string joinStr = "";
+            string whereStr = "";
+            if (workItemId > 0)
+            {
+                joinStr = "inner join OA_MATERIALTEMP_INST mi on t.MATERIALTEMP_INST_ID=mi.ID inner join OA_WORKITEM w on mi.PROJECTID=w.PROJECTID";
+                whereStr = "and w.ID=" + workItemId;
+            }
+            return service.GetDataCount(joinStr, whereStr);
         }
-        public string GetMaterialListByPage(int pageIndex,int pageSize)
+        public string GetMaterialListByPage(int pageIndex,int pageSize,int workItemId=0)
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(service.GetDataList(--pageIndex, pageSize));
+            string joinStr = "";
+            string whereStr = "";
+            if (workItemId > 0)
+            {
+                joinStr = "inner join OA_MATERIALTEMP_INST mi on t.MATERIALTEMP_INST_ID=mi.ID inner join OA_WORKITEM w on mi.PROJECTID=w.PROJECTID";
+                whereStr = "and w.ID="+workItemId;
+            }
+            return Newtonsoft.Json.JsonConvert.SerializeObject(service.GetDataList(--pageIndex, pageSize,joinStr,whereStr));
+        }
+        public int GetMaterialTempInstIdByProjectId(int projectId)
+        {
+            System.Data.DataTable dt =Util.DB.DBHelper.Query("select t.id from OA_MATERIALTEMP_INST t where t.PROJECTID=" + projectId);
+            if (dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32(dt.Rows[0]["ID"]);
+            }
+            return 0;
         }
         [HttpDelete]
         public Boolean DeleteMaterialById(int Id)
@@ -43,7 +67,15 @@ namespace ECJTU.OASystem.App.Controllers
             material.Update();
             return true;
         }
-        
+        public string GetMaterial(Model.Material material)
+        {
+            Util.Ftp.FtpFile ftpFile = new Util.Ftp.FtpFile();
+            ftpFile.Title = material.Name;
+            ftpFile.FilePath = material.Path;
+            string tempFilePath = Path.Combine(tempFileDir, material.Name);
+            Util.Ftp.FtpHelper.DownLoad(ftpFile, tempFilePath);
+            return ftpFile.Title;
+        }
         public Object AddMaterial(int materialTempInstId,string materialLocalPath)
         {
             FileInfo fileInfo = new FileInfo(materialLocalPath);
@@ -61,7 +93,7 @@ namespace ECJTU.OASystem.App.Controllers
             Dictionary<string, string> backData = new Dictionary<string, string>();
             backData.Add("Id", materialId.ToString());
             backData.Add("Path", material.Path);
-            return backData;
+            return Newtonsoft.Json.JsonConvert.SerializeObject(backData);
         }
     }
 }

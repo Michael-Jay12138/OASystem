@@ -52,6 +52,7 @@ var Login = function () {
 	        $('.login-form input').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.login-form').validate().form()) {
+			    setCookieName();
 	                    $('.login-form').submit();
 	                }
 	                return false;
@@ -104,6 +105,7 @@ var Login = function () {
 	        $('.forget-form input').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.forget-form').validate().form()) {
+			    setCookieName();
 	                    $('.forget-form').submit();
 	                }
 	                return false;

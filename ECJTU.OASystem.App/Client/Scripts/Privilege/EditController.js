@@ -19,20 +19,39 @@
             var privilegeupdate = $scope.$root.edit.privilege;
             privilegeService.update(privilegeupdate).then(function (result) {
                 console.log(result);
-                editMaterial(privilegeupdate);
+                editPrivilege(privilegeupdate);
+                updateRoles(privilegeupdate.Id);
             });
         };
         //添加数据
         var createPrivilege = function () {
             var privilegeadd = $scope.$root.edit.privilege;
             privilegeService.create(privilegeadd).then(function (result) {
-                var backdata = result.data;
-                console.log(backdata);
-                privilegeadd.Id = backdata.Id;
-                privilegeadd.PrivilegeRegisterDate = backdata.PrivilegeRegisterDate;
+                privilegeadd.Id = result;
                 addPrivilege(privilegeadd);
+                addRoles(privilegeadd.Id);
             });
         };
+        //为权限添加角色
+        function addRoles(privilegeId) {
+            var roleTree = $('#tree_1').jstree(true);
+            var selRoleIds = roleTree.get_selected();
+            $.post("../privilege/AddRoles", { privilegeId: privilegeId, roleIds: selRoleIds }).then(function (result) {
+                if (result) {
+
+                }
+            })
+        }
+        //更新角色用户信息
+        function updateRoles(privilegeId) {
+            var roleTree = $('#tree_1').jstree(true);
+            var selRoleIds = roleTree.get_selected();
+            $.post("../privilege/UpdateRoles", { privilegeId: privilegeId, roleIds: selRoleIds }).then(function (result) {
+                if (result) {
+
+                }
+            })
+        }
         //向列表添加数据
         var addPrivilege = function (privilege) {
             $scope.$root.privileges.push(privilege);

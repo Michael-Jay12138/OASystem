@@ -8,13 +8,13 @@
             return $http.get(materialTempApiUrl + "GetMaterialTempById/" + id);
         };
 
-        var update = function (MaterialTemp) {
-            return $http.put(materialTempApiUrl + "UpdateMaterialTemp/" + MaterialTemp.MaterialTempId, MaterialTemp);
+        var update = function (MaterialTemp, BuisnessId) {
+            return $http.put(materialTempApiUrl + "UpdateMaterialTemp/" + BuisnessId, MaterialTemp);
         };
 
-        var create = function (MaterialTemp) {
+        var create = function (MaterialTemp,BuisnessId) {
             console.log(MaterialTemp);
-            return $http.post(materialTempApiUrl + "CreateMaterialTemp/", MaterialTemp);
+            return $http.post(materialTempApiUrl + "CreateMaterialTemp", { businessId: BuisnessId, materialTemp: MaterialTemp });
         };
 
         var destroy = function (MaterialTemp) {

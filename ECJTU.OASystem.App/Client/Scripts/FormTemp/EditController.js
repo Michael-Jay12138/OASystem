@@ -42,8 +42,7 @@
         var createFormTemp = function () {
             var formTempadd = $scope.$root.edit.formTemp;
             formTempService.create(formTempadd).then(function (result) {
-                var backdata = result.data;
-                formTempadd.Id = backdata;
+                formTempadd.Id = result;
                 addFormTemp(formTempadd);
                 addRelationToBusiness(formTempadd.Id);
             });

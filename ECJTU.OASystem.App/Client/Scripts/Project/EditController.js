@@ -39,12 +39,16 @@
                 })
             }
             if ($scope.pageIndex == 3) {
-                //获取第二步填写的表单展现在第三部
+                //获取第二步填写的表单展现在第三步
                 var newNode = document.getElementById("tab2-form").cloneNode(true);
                 newNode.id = "tab3-form";
                 var oldNode = document.getElementById("tab3-form");
                 oldNode.parentNode.replaceChild(newNode, oldNode);
                 $("#tab3-form input").each(function () { $(this).attr("value", this.value) })
+                $.get("../user/GetFAUsersByBusinessId?businessId=" + $scope.$root.edit.project.BusinessId).then(function (result) {
+                    $scope.$root.edit.project.NextUsers = JSON.parse(result);
+                    $scope.$apply();
+                })
             }
         }
         //点击提交
@@ -52,9 +56,8 @@
             var form = $("#tab3-form").html();
             $.post('../FormTemp/formHtml2htmlFile', { formHtml: form }).then(function (result) {
                 console.log(result);
-                alert("表单保存成功");
+                //alert("表单保存成功");
                 createProject();
-                window.location = "#/project/list";
             });
         }
         $scope.back = function () {
@@ -79,10 +82,11 @@
             var projectadd = $scope.$root.edit.project;
             projectService.create(projectadd, getCookie("userName")).then(function (result) {
                 var backdata = result.data;
-                console.log(backdata);
-                projectadd.Id = backdata.Id;
-                projectadd.CreateTime = backdata.CreateTime;
-                addProject(projectadd);
+                //console.log(backdata);
+                //projectadd.Id = backdata.Id;
+                //projectadd.CreateTime = backdata.CreateTime;
+                //addProject(projectadd);
+                window.location = "#/project/list";
             });
         };
         //向列表添加数据

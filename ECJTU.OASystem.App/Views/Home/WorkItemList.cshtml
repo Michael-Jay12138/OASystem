@@ -11,11 +11,14 @@
     <script src="~/Client/Services/workitemService.js"></script>
     <script src="~/Client/Scripts/WorkItem/ListController.js"></script>
 <script src="~/Client/Scripts/WorkItem/EditController.js"></script>
+<script src="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
     <script>
         setCookie("type",@ViewBag.Type);
     </script>
 }
-
+@section headcss{
+    <link href="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+}
 <div data-ng-app="atTheWorkItem">
     <div ng-view></div>
 </div>

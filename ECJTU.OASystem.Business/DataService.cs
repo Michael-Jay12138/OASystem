@@ -64,10 +64,10 @@ namespace ECJTU.OASystem.Business
         /// <param name="joinStr"></param>
         /// <param name="whereStr"></param>
         /// <returns></returns>
-        public List<CommonAttribute> GetDataList(int pageIndex,int pageSize,string joinStr="",string whereStr="")
+        public List<CommonAttribute> GetDataList(int pageIndex,int pageSize,string joinStr="",string whereStr="",string selectStr="t.*")
         {
-            sql = "select t.* from "+ tableName + " t {0} where 1=1 {1}";
-            sql = string.Format(sql, joinStr, whereStr);
+            sql = "select {0} from "+ tableName + " t {1} where 1=1 {2}";
+            sql = string.Format(sql, selectStr,joinStr, whereStr);
             sql=DBHelper.GetPageSql(sql, pageIndex, pageSize);
             DataTable dt=DBHelper.Query(sql);
             return AssemblyDataList(dt);

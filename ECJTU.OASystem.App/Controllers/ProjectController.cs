@@ -28,12 +28,12 @@ namespace ECJTU.OASystem.App.Controllers
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(service.GetDataList(--pageIndex, pageSize));
         }
-        public Object CreateProject(Model.Project project,string userName)
+        public Object CreateProject(Model.Project project,string userName,int NextUserId)
         {
             //获取创建人
             Model.User user = new UserController().GetUserByName(userName);
             project.CreateUserId = user.Id;
-            project.CurrentUserId = user.Id;
+            project.CurrentUserId = NextUserId;
             //新建项目
             Dictionary<string, string> backData = (Dictionary<string, string>)project.Create();
             int projectId= Convert.ToInt32(backData["Id"]);
@@ -69,7 +69,7 @@ namespace ECJTU.OASystem.App.Controllers
                 workItem.ProjectId = projectId;
                 workItem.State = 0;
                 workItem.ActivityInstId = activityInstId;
-                workItem.ReceiveUserId = user.Id;
+                workItem.ReceiveUserId = NextUserId;
                 int workItemId=(int)workItem.Create();
                 project.WorkItemId = workItemId;
                 project.Update();

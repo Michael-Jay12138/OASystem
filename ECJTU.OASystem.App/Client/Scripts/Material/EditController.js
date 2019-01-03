@@ -36,24 +36,8 @@
 
             var xhr = new XMLHttpRequest();
             xhr.addEventListener("load", uploadComplete, false);
-            xhr.open("POST", "../Service/FileService.ashx");
+            xhr.open("POST", "../Service/FileUploadService.ashx");
             xhr.send(fd);
-            //$.ajax({
-            //    type: "POST",
-            //    url: "../Service/FileService.ashx",
-            //    data: fd,
-            //    processData: false,
-            //    success: function (result) {
-
-            //    }
-            //});
-            
-            //var materialadd = $scope.$root.edit.material;
-            //materialService.create(materialadd).then(function (result) {
-            //    console.log(backdata);
-            //    materialadd.Id = result;
-            //    addMaterial(materialadd);
-            //});
         };
         //添加数据
         function uploadComplete(result) {

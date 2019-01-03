@@ -21,7 +21,6 @@
 <hr />
 <div ng-app="atTheWorkItem">
     <div ng-controller="ListController" class="table-responsive">
-        <a href="" ng-click="create()" class="btn btn-info" data-toggle="modal" data-target="#createModal" ng-show="haveLogin()" style="float:left">新增</a>
         <form onsubmit="submitFn(this, event);">
             <button type="submit" class="btn btn-info" style="float:right">搜索</button>
             <input type="text" id="search-input" placeholder="请输入搜索词" data-autocomplete-source="/Home/QuickSearch" class="form-control" style="float:right">
@@ -31,7 +30,7 @@
                 <tr>
                     <th>工作项序号</th>
                     <th>项目序号</th>
-                    <th>环节实例序号</th>
+                    <th>项目名称</th>
                     <th>工作项状态</th>
                     <th>接收者序号</th>
                     <th ng-show="haveLogin()">操作</th>
@@ -40,7 +39,7 @@
             <tr ng-repeat="workitem in workitems">
                 <td>{{workitem.Id}}</td>
                 <td>{{workitem.ProjectId}}</td>
-                <td>{{workitem.ActivityInstId}}</td>
+                <td>{{workitem.Name}}</td>
                 <td>{{workitem.State}}</td>
                 <td>{{workitem.ReceiveUserId}}</td>
                 <td ng-show="haveLogin()">

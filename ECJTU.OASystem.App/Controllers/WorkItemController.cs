@@ -18,10 +18,6 @@ namespace ECJTU.OASystem.App.Controllers
         // GET: WorkItem
         public ActionResult Index()
         {
-            Util.Ftp.FtpFile ftpFile = new Util.Ftp.FtpFile();
-            ftpFile.Title = "测试文件.txt";
-            ftpFile.FilePath= "/OASystem/测试文件.txt";
-            Util.Ftp.FtpHelper.DownLoad(ftpFile, @"E:\测试文件.txt");
             return View();
         }
         public int GetDataCount(int type, string userName)
@@ -30,9 +26,32 @@ namespace ECJTU.OASystem.App.Controllers
         }
         public string GetWorkItemListByPage(int pageIndex,int pageSize,int type,string userName)
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(service.GetDataList(--pageIndex, pageSize, "inner join oa_user u on u.id=t.receive_user_id", "and t.state=" + type + " and u.name=" + userName));
+            return Newtonsoft.Json.JsonConvert.SerializeObject(service.GetDataList(--pageIndex, pageSize, "inner join oa_user u on u.id=t.receive_user_id inner join oa_project p on p.id=t.projectid", "and t.state=" + type + " and u.name=" + userName,"t.*,p.NAME"));
         }
-        
+        public string GetProcessingListInfo(string userName)
+        {
+            List<CommonAttribute> processingList=service.GetDataList("t.*,p.NAME", "inner join oa_user u on u.id=t.receive_user_id inner join oa_project p on p.id=t.projectid", "and t.state=0 and u.name=" + userName);
+            if (processingList.Count > 0)
+            {
+                List<string> content = new List<string>();
+                foreach (CommonAttribute workitem in processingList)
+                {
+                    string temp = @"<li>
+                                        <a href='javascript:;'>
+                                             <span class='time'>{0}</span>
+                                            <span class='details'>
+                                                <span class='label label-sm label-icon label-success'>
+                                                    <i class='fa fa-plus'></i>
+                                                </span> {1}
+                                            </span>
+                                        </a>
+                                    </li>";
+                    content.Add(string.Format(temp, workitem.Id, workitem.Name));
+                }
+                return Newtonsoft.Json.JsonConvert.SerializeObject(content);
+            }
+            return "";
+        }
         [HttpDelete]
         public Boolean DeleteWorkItemById(int Id)
         {
@@ -57,6 +76,10 @@ namespace ECJTU.OASystem.App.Controllers
             Model.Activity_Inst preActivityInst=(Model.Activity_Inst)new DataService("Activity_Inst", "OA_Activity_Inst").GetDataList("t.*", "", "and t.id=" + preActivityInstId)[0];
             preActivityInst.EndTime = DateTime.Now;
             preActivityInst.Update();
+            //表单实例更新
+            Model.FormInst formInst = (Model.FormInst)new DataService("FormInst", "OA_FORMINST").GetDataList("t.*", "", "and t.projectid=" + preWorkItem.ProjectId)[0];
+            formInst.Content= System.IO.File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "\\temp.html");
+            formInst.Update();
             //获取项目
             Model.Project project = (Model.Project)new DataService("Project", "OA_PROJECT").GetDataList("t.*", "", "and t.id=" + preWorkItem.ProjectId)[0];
             if (nextActivityId==0)

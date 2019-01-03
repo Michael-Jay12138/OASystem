@@ -1,0 +1,44 @@
+﻿public class AxisParameter {
+    private String name;
+    private QName xmlType;
+    private ParameterMode parameterMode;
+
+    public AxisParameter() {
+    }
+
+    public AxisParameter(String name) {
+        this.name = name;
+        this.xmlType = XMLType.XSD_STRING;
+        parameterMode = ParameterMode.IN;
+    }
+
+    public AxisParameter(String name, QName xmlType) {
+        this.name = name;
+        this.xmlType = xmlType;
+        parameterMode = ParameterMode.IN;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public QName getXmlType() {
+        return xmlType;
+    }
+
+    public void setXmlType(QName xmlType) {
+        this.xmlType = xmlType;
+    }
+
+    public ParameterMode getParameterMode() {
+        return parameterMode;
+    }
+
+    public void setParameterMode(ParameterMode parameterMode) {
+        this.parameterMode = parameterMode;
+    }
+}

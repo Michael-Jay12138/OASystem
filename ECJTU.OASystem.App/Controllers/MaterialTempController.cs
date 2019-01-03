@@ -33,14 +33,16 @@ namespace ECJTU.OASystem.App.Controllers
         {
             return service.DeleteDataById(Id);
         }
-        public Object CreateMaterialTemp(Model.MaterialTemp materialTemp,int businessId)
+        public Object CreateMaterialTemp(int businessId,Model.MaterialTemp materialTemp)
         {
-
-            return Newtonsoft.Json.JsonConvert.SerializeObject(materialTemp.Create());
+            int materialTempId = (int)materialTemp.Create();
+            Util.DB.DBHelper.ExcuetSql(string.Format("insert into OA_BUSINESS_MATERIALTEMP (ID,BUSINESSID,MATERIALTEMPID) values (SQ_OA_BUSINESS_MATERIALTEMP.nextval,{0},{1})", businessId, materialTempId));
+            return materialTempId;
         }
-        public Boolean UpdateMaterialTemp(Model.MaterialTemp materialTemp)
+        public Boolean UpdateMaterialTemp(int businessId,Model.MaterialTemp materialTemp)
         {
             materialTemp.Update();
+            Util.DB.DBHelper.ExcuetSql(string.Format("update OA_BUSINESS_MATERIALTEMP bm set bm.BUSINESSID={0} where bm.MATERIALTEMPID={1}", businessId, materialTemp.Id));
             return true;
         }
         public CommonAttribute GetMaterialTempByBusinessId(int businessId)

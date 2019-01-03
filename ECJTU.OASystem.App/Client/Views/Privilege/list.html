@@ -1,4 +1,6 @@
-﻿<script>
+﻿<link href="../Content/assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+<script src="../Content/assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+<script>
     //让表格数据可排序
     $(document).ready(function () {
         $("#table").tablesorter();
@@ -29,18 +31,16 @@
         <table class="table table-striped" id="table">
             <thead>
                 <tr>
-                    <th>用户序号</th>
-                    <th>用户名称</th>
-                    <th>联系方式</th>
-                    <th>注册时间</th>
+                    <th>权限序号</th>
+                    <th>权限名称</th>
+                    <th>父ID</th>
                     <th ng-show="haveLogin()">操作</th>
                 </tr>
             </thead>
             <tr ng-repeat="privilege in privileges">
                 <td>{{privilege.Id}}</td>
                 <td>{{privilege.Name}}</td>
-                <td>{{privilege.PrivilegePhone}}</td>
-                <td>{{privilege.PrivilegeRegisterDate}}</td>
+                <td>{{privilege.ParentId}}</td>
                 <td ng-show="haveLogin()">
                     <a href="" ng-click="edit(privilege)" data-toggle="modal" data-target="#createModal" class="btn btn-info">编辑</a>
                     <a href="" ng-click="confirmdelete(privilege)" data-toggle="modal" data-target="#confirmModal" class="btn btn-info">删除</a>
@@ -80,18 +80,16 @@
                         <fieldset>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <span class="input-group-addon">用户名称</span>
-                                    <input id="name" type="text" ng-model="edit.privilege.Name" required class="form-control" placeholder="用户名称" />
+                                    <span class="input-group-addon">权限名称</span>
+                                    <input id="name" type="text" ng-model="edit.privilege.Name" required class="form-control" placeholder="权限名称" />
                                 </div>
                                 <div class="input-group">
-                                    <span class="input-group-addon">登录密码</span>
-                                    <input id="privilegepwd" type="text" ng-model="edit.privilege.PrivilegePwd" required class="form-control" placeholder="登录密码" />
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">联系方式</span>
-                                    <input id="privilegephone" type="text" ng-model="edit.privilege.PrivilegePhone" required class="form-control" placeholder="联系方式" />
+                                    <span class="input-group-addon">父ID</span>
+                                    <input id="parentid" type="text" ng-model="edit.privilege.ParentId" required class="form-control" placeholder="父ID" />
                                 </div>
 
+                                <div id="tree_1" class="tree-demo">
+                                </div>
                             </div>
                         </fieldset>
                     </form>
@@ -113,8 +111,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="input-group">
-                            <span class="input-group-addon">用户姓名</span>
-                            <input id="name" type="text" ng-model="del.privilege.Name" required class="form-control" placeholder="PrivilegeName" />
+                            <span class="input-group-addon">权限名称</span>
+                            <input id="name" type="text" ng-model="del.privilege.Name" required class="form-control" placeholder="权限名称" />
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -50,6 +50,7 @@
                 },
                 model: '新增'
             };
+            getRoleTree(0);
         }
         //点击编辑按钮
         $scope.edit = function (Privilege) {
@@ -57,6 +58,7 @@
                 privilege: Privilege,
                 model: '编辑'
             };
+            getRoleTree(Privilege.Id);
         }
         //删除确认
         $scope.confirmdelete = function (Privilege) {
@@ -79,6 +81,17 @@
                 }
             }
         };
+        function getRoleTree(privilegeId) {
+            $.get("../role/GetRoleTreeByPrivilegeId?privilegeId=" + privilegeId).then(function (result) {
+                $('#tree_1').jstree("destroy");
+                $("#tree_1").jstree({
+                    "core": {
+                        "data": JSON.parse(result)
+                    },
+                    "plugins": ["themes", "json_data", "search", "checkbox"]
+                });
+            })
+        }
         //选择第几页
         $scope.selectPage = function (pageIndex) {
             $scope.pageIndex = pageIndex;

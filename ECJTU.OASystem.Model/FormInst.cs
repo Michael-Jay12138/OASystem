@@ -38,11 +38,17 @@ namespace ECJTU.OASystem.Model
 
         override public void Update()
         {
-            throw new NotImplementedException();
+            sql = "update oa_FormInst set ProjectId=:projectid,FormTempId=:formtempid,Content=:content where Id="+Id;
+            OracleParameter[] parameterValue = new OracleParameter[3];
+            parameterValue[0] = new OracleParameter("projectid", ProjectId);
+            parameterValue[1] = new OracleParameter("formtempid", FormTempId);
+            parameterValue[2] = new OracleParameter("content", Content);
+            DBHelper.ExcuetSql(sql, parameterValue);
         }
         override public void Assembly(System.Data.DataRow dr)
         {
             Id = Convert.ToInt32(dr["ID"].ToString());
+            ProjectId= Convert.ToInt32(dr["PROJECTID"].ToString());
             FormTempId = Convert.ToInt32(dr["FORMTEMPID"]);
             Content = (byte[])dr["CONTENT"];
         }
