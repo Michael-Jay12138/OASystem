@@ -14,7 +14,7 @@
 
         var create = function (Project,userName) {
             console.log(Project);
-            return $http.post(projectApiUrl + "CreateProject", { Project: Project, userName: userName, NextUserId: parseInt(Project.NextUserId)});
+            return $http.post(projectApiUrl + "CreateProject", { Project: Project, userName: userName});
         };
 
         var destroy = function (Project) {

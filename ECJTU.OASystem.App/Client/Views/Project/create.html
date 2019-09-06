@@ -43,7 +43,7 @@
                             <a href="#tab4" data-toggle="tab" class="step">
                                 <span class="number"> 3 </span>
                                 <span class="desc">
-                                    <i class="fa fa-check"></i> 确认并提交
+                                    <i class="fa fa-check"></i> 确认创建
                                 </span>
                             </a>
                         </li>
@@ -144,15 +144,7 @@
                             <div id="tab3-form">
 
                             </div>
-                            <h4 class="form-section">选择发送人员</h4>
-                            <div class="form-group">
-                                <label class="control-label col-md-3">用户名称:</label>
-                                <div class="col-md-4">
-                                    <select class="form-control" ng-model="edit.project.NextUserId">
-                                        <option ng-repeat="item in edit.project.NextUsers" value="{{item.Id}}">{{item.Name}}</option>
-                                    </select>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -167,7 +159,7 @@
                                 <i class="fa fa-angle-right"></i>
                             </a>
                             <a href="javascript:;" class="btn green button-submit" ng-show="showByIndex(['3'])" ng-click="submit()">
-                                提交
+                                确认创建
                                 <i class="fa fa-check"></i>
                             </a>
                         </div>

@@ -63,7 +63,6 @@
                 $scope.$apply();
                 window.location = "#/project/create";
             })
-            
         }
         //点击编辑按钮
         $scope.edit = function (Project) {

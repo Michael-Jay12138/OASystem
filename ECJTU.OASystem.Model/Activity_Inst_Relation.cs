@@ -14,7 +14,7 @@ namespace ECJTU.OASystem.Model
         public int PreActivityInstId { get; set; }
         override public Object Create()
         {
-            sql = "insert into oa_activity_inst_relation (ACTIVITY_INST_ID,PRE_ACTIVITY_INST_ID) values (sq_oa_activity_inst_relation.nextval,{0},{1}) ";
+            sql = "insert into oa_activity_inst_relation (ID,ACTIVITY_INST_ID,PRE_ACTIVITY_INST_ID) values (sq_oa_activity_inst_relation.nextval,{0},{1}) ";
             sql = string.Format(sql, ActivityInstId, PreActivityInstId);
             if (DBHelper.ExcuetSql(sql) > 0)
             {

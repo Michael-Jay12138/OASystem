@@ -27,7 +27,7 @@
 
             $scope.$root.edit.project.BusinessId = businesses[0].Id.toString();
             $scope.$apply();
-            window.location = "#/project/create";
+            //window.location = "#/project/create";
         })
         //点击下一步
         $scope.continue = function () {
@@ -45,13 +45,13 @@
                 var oldNode = document.getElementById("tab3-form");
                 oldNode.parentNode.replaceChild(newNode, oldNode);
                 $("#tab3-form input").each(function () { $(this).attr("value", this.value) })
-                $.get("../user/GetFAUsersByBusinessId?businessId=" + $scope.$root.edit.project.BusinessId).then(function (result) {
-                    $scope.$root.edit.project.NextUsers = JSON.parse(result);
-                    $scope.$apply();
-                })
+                //$.get("../user/GetFAUsersByBusinessId?businessId=" + $scope.$root.edit.project.BusinessId).then(function (result) {
+                //    $scope.$root.edit.project.NextUsers = JSON.parse(result);
+                //    $scope.$apply();
+                //})
             }
         }
-        //点击提交
+        //点击确认创建
         $scope.submit = function () {
             var form = $("#tab3-form").html();
             $.post('../FormTemp/formHtml2htmlFile', { formHtml: form }).then(function (result) {
